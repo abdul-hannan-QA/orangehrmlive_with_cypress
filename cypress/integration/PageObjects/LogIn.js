@@ -11,6 +11,15 @@ class Login{
         return cy.get("button[type='submit']")
     }
 
+    getrequriedtext(){
+        return cy.get(':nth-child(2) > .oxd-input-group > .oxd-text');
+    }
+
+    getrequriedtext2(){
+        return cy.get(':nth-child(3) > .oxd-input-group > .oxd-text');
+        
+    }
+
     
 
 
