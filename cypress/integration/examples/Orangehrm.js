@@ -1,16 +1,19 @@
 
 
 import Login from "../PageObjects/LogIn";
+import Employee from "../PageObjects/Employee ";
 
 
 
 
 describe('OrangeHRM Login Tests',function(){
 
-    before(function(){
-        cy.fixture('example').then(function(logindata){
+    let logindata; // Declare the global variable  to store fixture data
 
-            this.logindata=logindata;
+    before(function(){
+        cy.fixture('example').then(function(data){
+
+            logindata=data;
         })
     })
 
@@ -24,8 +27,8 @@ describe('OrangeHRM Login Tests',function(){
 
  const login=new Login()
 
- login.getUserName().type(this.logindata.userName);
- login.getUserPassword().type(this.logindata.passWard);
+ login.getUserName().type(logindata.userName);
+ login.getUserPassword().type(logindata.passWard);
  login.getSubmit().click();
 
  // Assert the user is redirected to the dashboard
@@ -62,5 +65,27 @@ describe('OrangeHRM Login Tests',function(){
     cy.url().should('not.include', '/dashboard'); // Ensure user is not redirected to the dashboard
 
 
+    })
+     //Employee module 
+    it('Add Employee Without Required Fields: Should display validation messages',function(){
+
+
+        const login=new Login()
+        login.getUserName().type(logindata.userName);
+        login.getUserPassword().type(logindata.passWard);
+        login.getSubmit().click();
+
+        const employee=new Employee()
+
+        employee.navigateToEmployee().click();
+        employee.navigateToAddEmployee().click();
+        employee.employeeName().click();
+
+
+
+
+
+    
+    
     })
 })
